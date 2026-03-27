@@ -1,3 +1,70 @@
+//package com.cg.entity;
+//
+//import jakarta.persistence.*;
+//import java.time.LocalDateTime;
+//
+//@Entity
+//@Table(name="messages")
+//public class Message {
+//
+//    @Id
+//    private Integer messageID;
+//    private String messageText;
+//    private LocalDateTime timestamp;
+//
+//    // Sender
+//    @ManyToOne
+//    @JoinColumn(name = "senderID")
+//    private User sender;
+//
+//    // Receiver
+//    @ManyToOne
+//    @JoinColumn(name = "receiverID")
+//    private User receiver;
+//
+//	public Integer getMessageID() {
+//		return messageID;
+//	}
+//
+//	public void setMessageID(Integer messageID) {
+//		this.messageID = messageID;
+//	}
+//
+//	public String getMessageText() {
+//		return messageText;
+//	}
+//
+//	public void setMessageText(String messageText) {
+//		this.messageText = messageText;
+//	}
+//
+//	public LocalDateTime getTimestamp() {
+//		return timestamp;
+//	}
+//
+//	public void setTimestamp(LocalDateTime timestamp) {
+//		this.timestamp = timestamp;
+//	}
+//
+//	public User getSender() {
+//		return sender;
+//	}
+//
+//	public void setSender(User sender) {
+//		this.sender = sender;
+//	}
+//
+//	public User getReceiver() {
+//		return receiver;
+//	}
+//
+//	public void setReceiver(User receiver) {
+//		this.receiver = receiver;
+//	}
+//    
+//    
+//}
+
 package com.cg.entity;
 
 import jakarta.persistence.*;
@@ -8,16 +75,16 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer messageID;
+
     private String messageText;
     private LocalDateTime timestamp;
 
-    // Sender
     @ManyToOne
     @JoinColumn(name = "senderID")
     private User sender;
 
-    // Receiver
     @ManyToOne
     @JoinColumn(name = "receiverID")
     private User receiver;
@@ -61,6 +128,6 @@ public class Message {
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
-    
+
     
 }
