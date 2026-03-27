@@ -7,19 +7,27 @@ import java.util.List;
 @Table(name="users")
 public class User {
 
-    @Id
-    private Integer userID;
-    private String username;
-    private String email;
-    private String password;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userID;
 
-    @Lob
-    @Column(name = "profile_picture")
-    private byte[] profilePicture;
+	private String username;
+	private String email;
+	private String password;
 
-    // One user → many posts
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
+	@Lob
+	@Column(name = "profile_picture")
+	private byte[] profilePicture;
+
+	// One user → many posts
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Post> posts;
+
+	// One user → one account
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private UserAccount userAccount;
+
+	// ===== Getters & Setters =====
 
 	public Integer getUserID() {
 		return userID;
@@ -68,6 +76,12 @@ public class User {
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
-    
-    
+
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
 }

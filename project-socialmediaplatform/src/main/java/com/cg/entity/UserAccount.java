@@ -7,37 +7,60 @@ import java.time.LocalDateTime;
 @Table(name = "user_account")
 public class UserAccount {
 
-    @Id
-    private String username;
-    private String password;
-    private LocalDateTime loginDate;
-    private String status;
-    
-    
-	public String getUsername() {
-		return username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer accountId;
+
+	private String password;
+
+	private LocalDateTime loginDate;
+
+	private String status;
+
+	// One-to-One mapping with User
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userID", unique = true)
+	private User user;
+
+	// ===== Getters & Setters =====
+
+	public Integer getAccountId() {
+		return accountId;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
 	}
+
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public LocalDateTime getLoginDate() {
 		return loginDate;
 	}
+
 	public void setLoginDate(LocalDateTime loginDate) {
 		this.loginDate = loginDate;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-    
-    
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
