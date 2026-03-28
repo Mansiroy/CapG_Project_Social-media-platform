@@ -6,30 +6,21 @@ import jakarta.persistence.*;
 @Table(name = "`Groups`")
 public class Group {
 
-    @Id
-    @Column(name = "groupID")
-    int groupID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer groupID;
 
-    @Column(name = "groupName")
-    String groupName;
+	private String groupName;
 
-    @ManyToOne
-    @JoinColumn(name = "adminID")
-    User admin;
+	@ManyToOne
+	@JoinColumn(name = "adminID")
+	private User admin;
 
-    public Group(int groupID, String groupName, User admin) {
-        this.groupID = groupID;
-        this.groupName = groupName;
-        this.admin = admin;
-    }
-
-    public Group() {}
-
-	public int getGroupID() {
+	public Integer getGroupID() {
 		return groupID;
 	}
 
-	public void setGroupID(int groupID) {
+	public void setGroupID(Integer groupID) {
 		this.groupID = groupID;
 	}
 
@@ -48,11 +39,4 @@ public class Group {
 	public void setAdmin(User admin) {
 		this.admin = admin;
 	}
-
-	@Override
-	public String toString() {
-		return "Group [groupID=" + groupID + ", groupName=" + groupName + ", admin=" + admin + "]";
-	}
-
-    
 }

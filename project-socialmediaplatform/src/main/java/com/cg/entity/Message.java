@@ -7,20 +7,20 @@ import java.time.LocalDateTime;
 @Table(name="messages")
 public class Message {
 
-    @Id
-    private Integer messageID;
-    private String messageText;
-    private LocalDateTime timestamp;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer messageID;
 
-    // Sender
-    @ManyToOne
-    @JoinColumn(name = "senderID")
-    private User sender;
+	private String messageText;
+	private LocalDateTime timestamp;
 
-    // Receiver
-    @ManyToOne
-    @JoinColumn(name = "receiverID")
-    private User receiver;
+	@ManyToOne
+	@JoinColumn(name = "senderID")
+	private User sender;
+
+	@ManyToOne
+	@JoinColumn(name = "receiverID")
+	private User receiver;
 
 	public Integer getMessageID() {
 		return messageID;
@@ -61,6 +61,6 @@ public class Message {
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
-    
-    
+
+
 }

@@ -11,18 +11,19 @@ public class UserAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer accountId;
 
+	private String username;
+
+	@Column(nullable = false)
 	private String password;
 
 	private LocalDateTime loginDate;
 
+	@Column(nullable = false)
 	private String status;
 
-	// One-to-One mapping with User
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userID", unique = true)
+	@OneToOne
+	@JoinColumn(name = "userID", nullable = false, unique = true)
 	private User user;
-
-	// ===== Getters & Setters =====
 
 	public Integer getAccountId() {
 		return accountId;
@@ -34,6 +35,10 @@ public class UserAccount {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public LocalDateTime getLoginDate() {
@@ -48,19 +53,25 @@ public class UserAccount {
 		return status;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getUsername() {
+		return username;
 	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
 }

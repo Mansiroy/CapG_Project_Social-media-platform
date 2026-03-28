@@ -7,20 +7,23 @@ import java.time.LocalDateTime;
 @Table(name="comments")
 public class Comment {
 
-    @Id
-    private Integer commentID;
-    private String commentText;
-    private LocalDateTime timestamp;
+	@Id
+	@Column(name = "commentID")
+	private Integer commentID;
 
-    // Many comments → one user
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private User user;
+	@Column(name = "comment_text")
+	private String commentText;
 
-    // Many comments → one post
-    @ManyToOne
-    @JoinColumn(name = "postID")
-    private Post post;
+	@Column(name = "timestamp")
+	private LocalDateTime timestamp;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "postID")
+	private Post post;
 
 	public Integer getCommentID() {
 		return commentID;
@@ -61,6 +64,4 @@ public class Comment {
 	public void setPost(Post post) {
 		this.post = post;
 	}
-    
-    
 }

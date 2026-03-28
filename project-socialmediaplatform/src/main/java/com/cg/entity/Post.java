@@ -8,23 +8,25 @@ import java.util.List;
 @Table(name="posts")
 public class Post {
 
-    @Id
-    private Integer postID;
-    private String content;
-    private LocalDateTime timestamp;
+	@Id
+	@Column(name = "postID")
+	private Integer postID;
 
-    // Many posts → one user
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private User user;
+	@Column(name = "content")
+	private String content;
 
-    // One post → many comments
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;    
+	@Column(name = "timestamp")
+	private LocalDateTime timestamp;
 
-    // One post → many comments
-    @OneToMany(mappedBy = "post")
-    private List<Likes> likes;
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@OneToMany(mappedBy = "post")
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "post")
+	private List<Likes> likes;
 
 	public Integer getPostID() {
 		return postID;
@@ -65,8 +67,12 @@ public class Post {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-    
-    
-    
-    
+
+	public List<Likes> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Likes> likes) {
+		this.likes = likes;
+	}
 }
